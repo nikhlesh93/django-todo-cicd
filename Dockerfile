@@ -1,6 +1,12 @@
 
 
-FROM python:3
+FROM python:3.8
+
+# Install ntpdate to synchronize time
+RUN apt-get update && apt-get install -y ntpdate
+
+# Sync the system time with an NTP server
+RUN ntpdate pool.ntp.org
 
 # Install distutils
 RUN apt-get update && apt-get install -y python3-distutils
@@ -8,10 +14,10 @@ RUN apt-get update && apt-get install -y python3-distutils
 # Set the working directory inside the container
 WORKDIR /data
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Django and other dependencies
+RUN pip install --no-cache-dir django==3.2
 
-# Copy the project files into the container
+# Copy project files into the container
 COPY . .
 
 # Run migrations (if needed)
