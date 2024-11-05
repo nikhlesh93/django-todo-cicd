@@ -6,7 +6,7 @@ FROM python:3.8
 RUN apt-get update && apt-get install -y ntpdate
 
 # Sync the system time with an NTP server
-RUN ntpdate pool.ntp.org
+#RUN ntpdate pool.ntp.org
 
 # Install distutils
 RUN apt-get update && apt-get install -y python3-distutils
